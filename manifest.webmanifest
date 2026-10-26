@@ -1,0 +1,15 @@
+{
+  "name": "Volver a mí",
+  "short_name": "Volver a mí",
+  "description": "Cinco encuentros para crear con las manos, escribir y compartir con otras mujeres que también están aprendiendo a quererse.",
+  "lang": "es",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FCFBF0",
+  "theme_color": "#FBFBEA",
+  "icons": [
+    { "src": "iconos/icono-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "iconos/icono-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
