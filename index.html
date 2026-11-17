@@ -182,6 +182,13 @@ section { padding-block: clamp(3.5rem, 8vw, 6.5rem); }
 .stat span { overflow-wrap: anywhere; }
 .note { font-size: .82rem; color: var(--olivo); margin-top: .8rem; }
 
+/* podcast */
+.pod { align-items: center; }
+.pod-links { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.8rem; }
+.pod-links .btn svg { width: 20px; height: 20px; flex: none; }
+.pod-links .btn.ghost { overflow-wrap: anywhere; }
+.pod-video iframe { display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: var(--r); background: var(--papel); box-shadow: 0 18px 40px rgba(70,50,20,.14); outline: 6px solid var(--acc2); transition: outline-color .6s; }
+
 /* ciclo */
 .cycle-band { background: var(--acc2); transition: background .6s ease; border-radius: 40px; padding-block: clamp(2rem, 5vw, 3.5rem); padding-inline: clamp(1rem, 4vw, 3rem); position: relative; overflow: hidden; }
 .tabs { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 2rem; }
@@ -321,6 +328,7 @@ footer { padding-block: 3rem; border-top: 1px solid var(--linea); font-size: .9r
     <ul>
       <li><a href="#que-es">Qué es</a></li>
       <li><a href="#historia">Cómo nació</a></li>
+      <li><a href="#podcast">El podcast</a></li>
       <li><a href="#ciclo">El ciclo</a></li>
       <li><a href="#encuentro">Un encuentro</a></li>
       <li><a href="#preguntas">Preguntas</a></li>
@@ -342,9 +350,10 @@ footer { padding-block: 3rem; border-top: 1px solid var(--linea); font-size: .9r
     <li style="--i:0"><a href="#inicio"><b>1</b>Inicio</a></li>
     <li style="--i:1"><a href="#que-es"><b>2</b>Qué es</a></li>
     <li style="--i:2"><a href="#historia"><b>3</b>Cómo nació</a></li>
-    <li style="--i:3"><a href="#ciclo"><b>4</b>El ciclo</a></li>
-    <li style="--i:4"><a href="#encuentro"><b>5</b>Un encuentro</a></li>
-    <li style="--i:5"><a href="#preguntas"><b>6</b>Preguntas</a></li>
+    <li style="--i:3"><a href="#podcast"><b>4</b>El podcast</a></li>
+    <li style="--i:4"><a href="#ciclo"><b>5</b>El ciclo</a></li>
+    <li style="--i:5"><a href="#encuentro"><b>6</b>Un encuentro</a></li>
+    <li style="--i:6"><a href="#preguntas"><b>7</b>Preguntas</a></li>
   </ol>
   <div class="menu-foot">
     <p>Seis lugares por grupo. Separa el tuyo.</p>
@@ -429,6 +438,26 @@ footer { padding-block: 3rem; border-top: 1px solid var(--linea); font-size: .9r
           <p class="note">Porcentajes de la encuesta del proyecto, 2026.</p>
         </div>
         <div class="frase"><p>“Hoy puedes darte el permiso de hacer una pausa, escucharte y volver a elegirte.”</p><small>Frase del individual de Transformación</small><img id="fraseEl" alt=""></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="podcast">
+    <div class="wrap two pod">
+      <div>
+        <div class="sec-head">
+          <span class="eyebrow">De dónde viene todo</span>
+          <h2 class="s title">En Deconstrucción Podcast</h2>
+        </div>
+        <p class="lead">El podcast de Isabella Ruiz es una guía práctica para el bienestar mental, emocional y físico: conversaciones fáciles con expertas y expertos sobre autoestima, relaciones, mente y cuerpo. Volver a mí nace de esas conversaciones.</p>
+        <div class="pod-links">
+          <a class="btn" href="https://www.youtube.com/@EnDeconstruccionPodcast" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21.6 7.2a2.5 2.5 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8zM10 15V9l5.2 3z"/></svg>Ver el canal en YouTube</a>
+          <a class="btn ghost" href="https://www.instagram.com/endeconstruccionpodcast/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>@endeconstruccionpodcast</a>
+        </div>
+      </div>
+      <div class="pod-video">
+        <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=UUot-s3bkfX1uDyJTLciTf6Q" title="Episodios de En Deconstrucción Podcast" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <p class="note">Los episodios más recientes del canal. Toca el ícono de lista para ver todos.</p>
       </div>
     </div>
   </section>

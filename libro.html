@@ -16,6 +16,8 @@
   header h1{font-size:17px;font-weight:600;color:var(--rojo);text-align:center;flex:1}
   #stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 16px;min-height:0}
   #book{margin:0 auto}
+  #book .page{background:#fff;overflow:hidden}
+  #book .page img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;user-select:none}
   #load{text-align:center;font-size:15px;color:var(--olivo)}
   #bar{width:220px;height:6px;border-radius:6px;background:var(--rosado);margin:12px auto 0;overflow:hidden}
   #bar i{display:block;height:100%;width:0;background:var(--rojo);transition:width .2s}
@@ -34,34 +36,31 @@
 <div id="stage"><div id="load">Abriendo el libro…<div id="bar"><i></i></div></div><div id="book"></div></div>
 <p id="hint">Gira tu celular para verlo más grande · desliza para pasar la página</p>
 <nav><button id="prev" aria-label="Página anterior">‹</button><span id="num"></span><button id="next" aria-label="Página siguiente">›</button></nav>
-<script src="js/pdf.min.js"></script>
 <script src="js/page-flip.browser.js"></script>
 <script>
+// Las páginas son JPG de 2000 px generados desde los PDF originales (carpeta libro/).
+// Se muestran como <img> (modo HTML) para que se vean nítidas en pantallas retina.
 const DOCS = {
-  manual:  { file: 'manual.pdf',  title: 'Manual de marca' },
-  memoria: { file: 'memoria.pdf', title: 'Memoria digital' }
+  manual:  { file: 'manual.pdf',  dir: 'libro/manual',  pages: 29, title: 'Manual de marca' },
+  memoria: { file: 'memoria.pdf', dir: 'libro/memoria', pages: 40, title: 'Memoria digital' }
 };
 const doc = DOCS[new URLSearchParams(location.search).get('doc')] || DOCS.manual;
 document.getElementById('title').textContent = doc.title;
 document.title = 'Volver a mí · ' + doc.title;
 document.getElementById('pdf').href = doc.file;
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
 (async () => {
   const load = document.getElementById('load'), bar = document.querySelector('#bar i');
-  let pdf;
-  try { pdf = await pdfjsLib.getDocument(doc.file).promise; }
-  catch (e) { load.innerHTML = '<p class="err">No se encontró el archivo <b>' + doc.file + '</b>. Súbelo a la misma carpeta de esta página.</p>'; return; }
-  const imgs = []; let ratio = 0.65;
-  const target = Math.min(1400, Math.max(900, window.innerWidth * (window.devicePixelRatio || 1)));
-  for (let i = 1; i <= pdf.numPages; i++) {
-    const page = await pdf.getPage(i);
-    const v0 = page.getViewport({ scale: 1 }); if (i === 1) ratio = v0.height / v0.width;
-    const v = page.getViewport({ scale: target / v0.width });
-    const c = document.createElement('canvas'); c.width = v.width; c.height = v.height;
-    await page.render({ canvasContext: c.getContext('2d'), viewport: v }).promise;
-    imgs.push(c.toDataURL('image/jpeg', 0.86));
-    bar.style.width = (100 * i / pdf.numPages) + '%';
-  }
+  const urls = Array.from({ length: doc.pages }, (_, i) => doc.dir + '/' + String(i + 1).padStart(2, '0') + '.jpg');
+  let done = 0, imgs;
+  try {
+    imgs = await Promise.all(urls.map(u => new Promise((ok, fail) => {
+      const im = new Image(); im.decoding = 'async'; im.alt = '';
+      im.onload = () => { bar.style.width = (100 * ++done / urls.length) + '%'; ok(im); };
+      im.onerror = () => fail(u); im.src = u;
+    })));
+  } catch (u) { load.innerHTML = '<p class="err">No se pudo cargar <b>' + u + '</b>. Revisa tu conexión e inténtalo de nuevo.</p>'; return; }
+  const ratio = imgs[0].naturalHeight / imgs[0].naturalWidth;
+  const pages = imgs.map(im => { const d = document.createElement('div'); d.className = 'page'; d.appendChild(im); return d; });
   load.remove();
   const stage = document.getElementById('stage');
   const pw = 600, ph = Math.round(pw * ratio);
@@ -70,7 +69,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
     minHeight: Math.round(240 * ratio), maxHeight: Math.round(1000 * ratio),
     maxShadowOpacity: 0.35, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 800
   });
-  flip.loadFromImages(imgs);
+  flip.loadFromHTML(pages);
   const num = document.getElementById('num');
   const upd = () => num.textContent = (flip.getCurrentPageIndex() + 1) + ' / ' + flip.getPageCount();
   flip.on('flip', upd); upd();
