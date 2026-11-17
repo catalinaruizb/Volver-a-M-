@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volver a mí · Libro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--crema:#FAFAEC;--rojo:#BE4940;--rosado:#FBCDD4;--olivo:#7E774C;--tinta:#5f5a3c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{background:var(--crema);color:var(--tinta);font-family:'Nunito Sans',system-ui,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+  header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 16px}
+  header a{color:var(--rojo);text-decoration:none;font-weight:600;font-size:15px;white-space:nowrap}
+  header h1{font-size:17px;font-weight:600;color:var(--rojo);text-align:center;flex:1}
+  #stage{flex:1;display:flex;align-items:center;justify-content:center;padding:6px 16px;min-height:0}
+  #book{margin:0 auto}
+  #load{text-align:center;font-size:15px;color:var(--olivo)}
+  #bar{width:220px;height:6px;border-radius:6px;background:var(--rosado);margin:12px auto 0;overflow:hidden}
+  #bar i{display:block;height:100%;width:0;background:var(--rojo);transition:width .2s}
+  #hint{display:none;text-align:center;font-size:13px;color:var(--olivo);padding:0 16px}
+  @media (orientation:portrait) and (max-width:700px){#hint{display:block}}
+  nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px 16px 20px}
+  nav button{width:46px;height:46px;border-radius:50%;border:2px solid var(--rosado);background:#fff;color:var(--rojo);font-size:22px;cursor:pointer}
+  nav button:active{transform:scale(.95)}
+  #num{min-width:80px;text-align:center;font-size:15px}
+  #pdf{font-size:14px;color:var(--olivo)}
+  .err{color:var(--rojo);max-width:320px;margin:auto;text-align:center;line-height:1.4}
+</style>
+</head>
+<body>
+<header><a href="enlaces.html">← Volver</a><h1 id="title">Volver a mí</h1><a id="pdf" href="#" download>PDF</a></header>
+<div id="stage"><div id="load">Abriendo el libro…<div id="bar"><i></i></div></div><div id="book"></div></div>
+<p id="hint">Gira tu celular para verlo más grande · desliza para pasar la página</p>
+<nav><button id="prev" aria-label="Página anterior">‹</button><span id="num"></span><button id="next" aria-label="Página siguiente">›</button></nav>
+<script src="js/pdf.min.js"></script>
+<script src="js/page-flip.browser.js"></script>
+<script>
+const DOCS = {
+  manual:  { file: 'manual.pdf',  title: 'Manual de marca' },
+  memoria: { file: 'memoria.pdf', title: 'Memoria digital' }
+};
+const doc = DOCS[new URLSearchParams(location.search).get('doc')] || DOCS.manual;
+document.getElementById('title').textContent = doc.title;
+document.title = 'Volver a mí · ' + doc.title;
+document.getElementById('pdf').href = doc.file;
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'js/pdf.worker.min.js';
+(async () => {
+  const load = document.getElementById('load'), bar = document.querySelector('#bar i');
+  let pdf;
+  try { pdf = await pdfjsLib.getDocument(doc.file).promise; }
+  catch (e) { load.innerHTML = '<p class="err">No se encontró el archivo <b>' + doc.file + '</b>. Súbelo a la misma carpeta de esta página.</p>'; return; }
+  const imgs = []; let ratio = 0.65;
+  const target = Math.min(1400, Math.max(900, window.innerWidth * (window.devicePixelRatio || 1)));
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const v0 = page.getViewport({ scale: 1 }); if (i === 1) ratio = v0.height / v0.width;
+    const v = page.getViewport({ scale: target / v0.width });
+    const c = document.createElement('canvas'); c.width = v.width; c.height = v.height;
+    await page.render({ canvasContext: c.getContext('2d'), viewport: v }).promise;
+    imgs.push(c.toDataURL('image/jpeg', 0.86));
+    bar.style.width = (100 * i / pdf.numPages) + '%';
+  }
+  load.remove();
+  const stage = document.getElementById('stage');
+  const pw = 600, ph = Math.round(pw * ratio);
+  const flip = new St.PageFlip(document.getElementById('book'), {
+    width: pw, height: ph, size: 'stretch', minWidth: 240, maxWidth: 1000,
+    minHeight: Math.round(240 * ratio), maxHeight: Math.round(1000 * ratio),
+    maxShadowOpacity: 0.35, showCover: true, usePortrait: true, mobileScrollSupport: false, flippingTime: 800
+  });
+  flip.loadFromImages(imgs);
+  const num = document.getElementById('num');
+  const upd = () => num.textContent = (flip.getCurrentPageIndex() + 1) + ' / ' + flip.getPageCount();
+  flip.on('flip', upd); upd();
+  document.getElementById('prev').onclick = () => flip.flipPrev();
+  document.getElementById('next').onclick = () => flip.flipNext();
+  document.addEventListener('keydown', e => { if (e.key === 'ArrowLeft') flip.flipPrev(); if (e.key === 'ArrowRight') flip.flipNext(); });
+  const fit = () => { const h = stage.clientHeight - 12, w = stage.clientWidth;
+    const bw = w < 700 ? Math.min(w, h / ratio) : Math.min(w, 2 * h / ratio);
+    document.getElementById('book').style.width = bw + 'px'; };
+  fit(); addEventListener('resize', fit);
+})();
+</script>
+</body>
+</html>

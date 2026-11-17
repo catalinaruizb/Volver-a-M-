@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Volver a mí</title>
+<meta name="description" content="Manual de marca, memoria, Instagram, inscripción e invitación de Volver a mí.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{--crema:#FAFAEC;--rojo:#BE4940;--rosado:#FBCDD4;--olivo:#7E774C;--tinta:#5f5a3c}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--crema);color:var(--tinta);font-family:'Nunito Sans',system-ui,sans-serif;min-height:100vh;
+       display:flex;justify-content:center;padding:40px 18px 48px}
+  main{width:100%;max-width:440px;text-align:center}
+  .logo{width:min(300px,82%);margin:0 auto 14px;display:block}
+  .slogan{color:var(--olivo);font-size:17px;font-weight:300}
+  .ola{height:14px;margin:22px auto 26px;width:180px;
+       background:radial-gradient(circle at 10px -4px,transparent 9px,var(--rosado) 10px 12px,transparent 13px) 0 0/20px 14px repeat-x}
+  .links{display:flex;flex-direction:column;gap:12px}
+  a.btn{display:flex;align-items:center;gap:14px;text-decoration:none;padding:14px 18px;border-radius:18px;text-align:left;
+        background:#fff;color:var(--tinta);border:2px solid var(--rosado);transition:transform .15s,background .15s}
+  a.btn:active{transform:scale(.98)} a.btn:hover{background:#fff7f6}
+  .ic{flex:0 0 46px;height:46px;border-radius:14px;display:grid;place-items:center;color:var(--crema)}
+  .ic svg{width:24px;height:24px}
+  .t{font-weight:600;font-size:17px;color:var(--rojo);display:block}
+  .d{font-size:14px;font-weight:300;display:block;margin-top:1px}
+  .libro .t::after{content:"  ·  libro";font-weight:300;font-size:13px;color:var(--olivo)}
+  footer{margin-top:30px;font-size:13px;font-weight:300;color:#8b7d72}
+</style>
+</head>
+<body>
+<main>
+  <img class="logo" src="img/logo.png" alt="Volver a mí">
+  <p class="slogan">Un espacio para mirarte desde afuera</p>
+  <div class="ola"></div>
+  <nav class="links">
+    <a class="btn libro" href="libro.html?doc=manual">
+      <span class="ic" style="background:var(--rojo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6c-2-1.5-5-2-8-1.5v14c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5v-14C17 4 14 4.5 12 6z"/><path d="M12 6v14"/></svg></span>
+      <span><span class="t">Manual de marca</span><span class="d">La identidad visual de Volver a mí</span></span></a>
+    <a class="btn libro" href="libro.html?doc=memoria">
+      <span class="ic" style="background:var(--olivo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4M9 12h7M9 16h7"/></svg></span>
+      <span><span class="t">Memoria digital</span><span class="d">El proceso del proyecto de grado</span></span></a>
+    <a class="btn" href="https://www.instagram.com/volver.a.mi____/" target="_blank" rel="noopener">
+      <span class="ic" style="background:var(--rojo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg></span>
+      <span><span class="t">Instagram</span><span class="d">@volver.a.mi____</span></span></a>
+    <a class="btn" href="index.html">
+      <span class="ic" style="background:var(--olivo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span>
+      <span><span class="t">Inscripción</span><span class="d">Únete a Volver a mí</span></span></a>
+    <a class="btn" href="invitacion.html">
+      <span class="ic" style="background:var(--rojo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+      <span><span class="t">Invitación</span><span class="d">Ábrela, es para ti</span></span></a>
+  </nav>
+  <footer>Volver a mí · Proyecto de grado · Catalina Ruiz Bermeo</footer>
+</main>
+</body>
+</html>
