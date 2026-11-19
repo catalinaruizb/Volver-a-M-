@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>By Catalina — Portafolio de Diseño</title>
+<meta name="description" content="By Catalina · Portafolio personal de diseño gráfico, branding y dirección de arte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Archivo:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,600&family=Homemade+Apple&family=Pinyon+Script&family=Space+Mono:wght@400;700&family=VT323&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   BY CATALINA — sistema visual
+   Paleta: vino (damasco), rosa bebé, carbón, crema, cromo
+   ========================================================= */
+:root{
+  --vino:#4a1d24;
+  --vino-2:#5e2a31;
+  --vino-3:#2e0f14;
+  --rosa:#f7d6e0;
+  --rosa-2:#f2bccd;
+  --carbon:#1b1a1a;
+  --carbon-2:#2a2928;
+  --crema:#f1ece2;
+  --papel:#faf7f1;
+  --cafe:#5a4031;
+  --tinta:#141414;
+  --gris:#8c8a86;
+
+  --f-bold:'Archivo Black', 'Archivo', sans-serif;
+  --f-cond:'Anton', 'Archivo Black', sans-serif;
+  --f-serif:'Cormorant Garamond', Georgia, serif;
+  --f-script:'Pinyon Script', cursive;
+  --f-mono:'Space Mono', ui-monospace, monospace;
+  --f-pixel:'VT323', monospace;
+  --f-hand:'Homemade Apple', cursive;
+
+  /* texturas reutilizables (SVG inline) */
+  --grano:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  --papel-fibra:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='4' seed='4'/><feColorMatrix values='0 0 0 0 .3  0 0 0 0 .25  0 0 0 0 .2  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23p)'/></svg>");
+  --damasco:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='160' viewBox='0 0 120 160'><g fill='none' stroke='%23ffffff' stroke-opacity='.07' stroke-width='2'><path d='M60 10c18 20 30 34 30 50s-14 28-30 40c-16-12-30-24-30-40s12-30 30-50z'/><path d='M60 30c9 12 15 20 15 30s-7 16-15 22c-8-6-15-12-15-22s6-18 15-30z'/><path d='M0 80c14 0 22 10 22 22s-10 22-22 22M120 80c-14 0-22 10-22 22s10 22 22 22'/><circle cx='60' cy='130' r='6'/><path d='M40 140q20 18 40 0'/></g></svg>");
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--carbon);color:var(--tinta);font-family:var(--f-mono);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* capa de grano global */
+body::after{content:"";position:fixed;inset:-50%;background:var(--grano);opacity:.22;pointer-events:none;z-index:999;mix-blend-mode:multiply;animation:grano 1.2s steps(4) infinite}
+@keyframes grano{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-1%)}}
+
+/* ---------- utilidades tipográficas ---------- */
+.tracked{font-family:var(--f-bold);text-transform:uppercase;letter-spacing:.32em}
+.mono-s{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.script{font-family:var(--f-script);font-weight:400}
+.serif-i{font-family:var(--f-serif);font-style:italic}
+.pixel{font-family:var(--f-pixel)}
+
+/* ---------- placeholders de foto (reemplaza por <img>) ---------- */
+.ph{position:relative;background:
+   radial-gradient(120% 90% at 30% 20%, #d9d6d1 0%, #a9a59f 55%, #6d6a66 100%);
+   overflow:hidden}
+.ph::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.5;mix-blend-mode:multiply}
+.ph::after{content:attr(data-label);position:absolute;left:10px;bottom:8px;font:700 10px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;color:#fff;opacity:.85}
+.ph img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1;filter:grayscale(.15) contrast(1.05)}
+.ph.bw img{filter:grayscale(1) contrast(1.1)}
+.ph.dark{background:radial-gradient(120% 90% at 30% 20%, #5b5856 0%, #2b2a29 70%)}
+.ph.pink{background:radial-gradient(120% 90% at 30% 20%, #fbe6ec 0%, #e9a9bc 100%)}
+
+/* ---------- objetos de collage ---------- */
+.tape{position:absolute;width:110px;height:30px;background:rgba(241,232,210,.72);box-shadow:0 1px 2px rgba(0,0,0,.15);
+  clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%);z-index:5}
+.tape::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.25}
+.polaroid{position:absolute;background:var(--papel);padding:10px 10px 44px;box-shadow:0 18px 30px -12px rgba(0,0,0,.55),0 2px 4px rgba(0,0,0,.2)}
+.polaroid .cap{position:absolute;left:12px;right:12px;bottom:10px;font:400 14px/1 var(--f-hand);color:#222;display:flex;justify-content:space-between}
+.pin{position:absolute;border-radius:50%;box-shadow:inset -6px -8px 14px rgba(0,0,0,.35),inset 6px 6px 10px rgba(255,255,255,.5),0 8px 14px rgba(0,0,0,.45);display:grid;place-items:center;z-index:6}
+.barcode{display:inline-block;padding:8px 10px 4px;background:var(--papel);box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.barcode .bars{height:42px;width:160px;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 4px,#111 4px 5px,transparent 5px 8px,#111 8px 11px,transparent 11px 12px,#111 12px 13px,transparent 13px 16px)}
+.barcode .num{font:400 11px/1.4 var(--f-mono);letter-spacing:.25em;text-align:center}
+.sticker{position:absolute;padding:14px 22px;font-family:var(--f-script);font-size:34px;color:var(--vino);background:var(--rosa);box-shadow:0 10px 18px -6px rgba(0,0,0,.45)}
+
+/* =========================================================
+   01 · HERO — funda plástica / archivo
+   ========================================================= */
+.hero{position:relative;min-height:100vh;overflow:hidden;color:var(--crema);
+  background:
+   linear-gradient(100deg, transparent 0 18%, rgba(255,255,255,.07) 22%, transparent 27%, transparent 60%, rgba(255,255,255,.05) 66%, transparent 72%),
+   radial-gradient(140% 100% at 70% 30%, #3b3a39 0%, #1c1b1b 60%, #0f0f0f 100%)}
+.hero::before{ /* arrugas del plástico */
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+   repeating-linear-gradient(176deg, transparent 0 90px, rgba(255,255,255,.035) 92px, transparent 96px),
+   repeating-linear-gradient(8deg, transparent 0 140px, rgba(255,255,255,.03) 143px, transparent 150px);
+  mix-blend-mode:screen}
+.filmstrip{position:absolute;left:0;top:0;bottom:0;width:86px;background:#e9e4da;z-index:2;
+  display:flex;flex-direction:column;gap:14px;padding:18px 0 0 22px;overflow:hidden}
+.filmstrip::before{content:"";position:absolute;left:4px;top:0;bottom:0;width:12px;
+  background:radial-gradient(circle at 6px 10px, var(--carbon) 4px, transparent 5px) 0 0/12px 28px repeat-y}
+.filmstrip .ph{width:56px;height:84px;flex:none}
+.hero-ghost{position:absolute;left:96px;font-family:var(--f-bold);font-size:clamp(60px,9vw,140px);letter-spacing:.06em;color:rgba(255,255,255,.08);white-space:nowrap;line-height:1;pointer-events:none}
+.hero-ghost.g1{top:14%} .hero-ghost.g2{bottom:12%}
+
+.hero-nav{position:absolute;top:0;left:86px;right:0;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(18px,4vw,48px);z-index:20}
+.hero-nav .mark{font-family:var(--f-script);font-size:30px;color:var(--rosa)}
+.hero-nav ul{list-style:none;display:flex;gap:clamp(12px,2.5vw,32px)}
+.hero-nav a{text-decoration:none;font:700 11px/1 var(--f-mono);letter-spacing:.28em;text-transform:uppercase;color:var(--crema);opacity:.8}
+.hero-nav a:hover{opacity:1;color:var(--rosa)}
+
+.hero-stage{position:relative;z-index:3;min-height:100vh;margin-left:86px;display:grid;place-items:center;padding:100px 20px 60px}
+.collage{position:relative;width:min(760px,92vw);aspect-ratio:1/1}
+
+/* credencial */
+.badge{position:absolute;left:4%;top:16%;width:54%;transform:rotate(-14deg);z-index:4}
+.badge .clip{position:absolute;left:50%;top:-74px;transform:translateX(-50%);width:46px;height:84px;
+  background:linear-gradient(90deg,#9a9a9a,#f2f2f2 35%,#bdbdbd 55%,#fafafa 75%,#8e8e8e);border-radius:10px 10px 4px 4px;box-shadow:0 6px 10px rgba(0,0,0,.4)}
+.badge .clip::after{content:"";position:absolute;left:50%;top:12px;width:14px;height:14px;transform:translateX(-50%);border-radius:50%;background:#222;box-shadow:inset 0 0 0 4px #ccc}
+.badge .card{position:relative;background:linear-gradient(180deg,rgba(255,255,255,.85),rgba(240,240,240,.75));padding:10px;border-radius:12px;box-shadow:0 30px 40px -18px rgba(0,0,0,.8),inset 0 0 0 1px rgba(255,255,255,.7)}
+.badge .inner{background:var(--papel);color:var(--tinta);padding:18px 18px 14px;border-radius:4px;position:relative}
+.badge .inner::before{content:"";position:absolute;inset:0;background:var(--papel-fibra);pointer-events:none}
+.badge .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.badge .brand{font-family:var(--f-bold);font-size:clamp(16px,2.6vw,26px);letter-spacing:.04em;line-height:.95}
+.badge .brand sup{font-size:.45em}
+.badge .cert{font:700 9px/1 var(--f-mono);letter-spacing:.3em;margin-top:6px}
+.badge .id{font:400 9px/1.2 var(--f-mono);writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.2em}
+.badge .body{display:flex;gap:14px;margin-top:14px}
+.badge .body .ph{width:38%;aspect-ratio:3/4;flex:none}
+.badge .fields{flex:1;display:flex;flex-direction:column;gap:12px;padding-top:6px}
+.badge .fields div{border-bottom:1px solid #222;padding-bottom:3px;font:400 8px/1 var(--f-mono);letter-spacing:.18em;text-transform:uppercase;display:flex;gap:8px;align-items:flex-end}
+.badge .fields b{font:400 13px/1 var(--f-hand);text-transform:none;letter-spacing:0;color:#1b2a6b}
+.badge .foot{text-align:center;font:400 8px/1 var(--f-mono);letter-spacing:.3em;margin-top:10px}
+
+.ring{position:absolute;left:-4%;top:12%;width:22%;aspect-ratio:1;border-radius:50%;
+  border:9px solid transparent;background:conic-gradient(#777,#fff,#999,#eee,#666,#ddd,#777) border-box;
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 9px));mask:radial-gradient(farthest-side,transparent calc(100% - 9px),#000 calc(100% - 9px));z-index:5;transform:rotate(20deg)}
+
+.pink-card{position:absolute;right:-6%;top:52%;width:62%;background:var(--rosa);color:var(--carbon);padding:clamp(22px,4vw,42px) 24px;z-index:8;transform:rotate(1deg);box-shadow:0 24px 40px -20px rgba(0,0,0,.8)}
+.pink-card::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.18;mix-blend-mode:multiply}
+.pink-card h1{font-family:var(--f-bold);font-size:clamp(28px,5.6vw,58px);line-height:.9;letter-spacing:.02em;text-transform:uppercase;display:flex;align-items:center;gap:.15em;flex-wrap:wrap}
+.pink-card h1 .star{font-size:.7em}
+.pink-card h1 sup{font-size:.3em;align-self:flex-start;margin-top:.3em}
+.pink-card p{font:700 10px/1.6 var(--f-mono);letter-spacing:.32em;text-transform:uppercase;margin-top:14px}
+
+.script-label{position:absolute;right:6%;top:26%;width:34%;padding:18px 10px;background:var(--rosa-2);text-align:center;font-family:var(--f-script);font-size:clamp(26px,4.4vw,48px);color:var(--carbon);transform:rotate(-8deg);z-index:2;box-shadow:0 14px 20px -10px rgba(0,0,0,.6)}
+.vellum{position:absolute;right:14%;top:18%;width:34%;height:30%;background:rgba(255,255,255,.35);backdrop-filter:blur(1px);transform:rotate(6deg);z-index:1}
+.safety-pin{position:absolute;right:14%;top:38%;width:30%;z-index:6;transform:rotate(18deg);filter:drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+.hero .barcode{position:absolute;right:-4%;bottom:8%;transform:rotate(-3deg);z-index:6}
+.hero .polaroid{left:2%;bottom:-6%;width:36%;transform:rotate(-9deg);z-index:7}
+.hero .polaroid .ph{aspect-ratio:4/3}
+.pin.star{left:46%;top:4%;width:13%;aspect-ratio:1;background:radial-gradient(circle at 35% 30%,#8b6b5a,#4b3328 70%);color:#f3e3b5;font-size:clamp(20px,4vw,40px)}
+.pin.cream{right:44%;bottom:2%;width:15%;aspect-ratio:1;background:radial-gradient(circle at 35% 30%,#fbf3dc,#e3d3ad 70%);color:var(--carbon);font-family:var(--f-script);font-size:clamp(14px,2.4vw,24px);line-height:.9;text-align:center}
+.pin.heart{left:-8%;bottom:34%;width:20%;aspect-ratio:1;border-radius:22px;background:#f5dc87;color:var(--carbon);font:900 clamp(18px,3.6vw,36px)/.9 var(--f-bold);text-align:center;transform:rotate(-12deg)}
+.pin.heart span{color:#d7372f}
+
+.hero-foot{position:absolute;left:86px;right:0;bottom:0;display:flex;justify-content:space-between;padding:18px clamp(18px,4vw,48px);z-index:20;color:var(--crema);opacity:.7}
+
+/* =========================================================
+   02 · ABOUT — revista vino con damasco
+   ========================================================= */
+.spread-wrap{background:var(--crema);padding:clamp(40px,8vw,110px) clamp(16px,4vw,60px);position:relative}
+.spread-wrap::before{content:"";position:absolute;inset:0;background:var(--papel-fibra);opacity:.7;pointer-events:none}
+.sec-head{position:relative;display:flex;justify-content:space-between;align-items:flex-end;max-width:1240px;margin:0 auto 28px;gap:20px;flex-wrap:wrap}
+.sec-head .num{font-family:var(--f-pixel);font-size:28px;letter-spacing:.1em}
+.sec-head h2{font-family:var(--f-bold);font-size:clamp(14px,2vw,18px);letter-spacing:.5em;text-transform:uppercase}
+
+.spread{position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;box-shadow:0 40px 60px -30px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.05)}
+.spread::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:60px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(0,0,0,.18) 48%,rgba(0,0,0,.28) 50%,rgba(255,255,255,.08) 52%,transparent);pointer-events:none}
+.page{position:relative;min-height:640px;padding:clamp(24px,4vw,56px);overflow:hidden}
+.page.vino{background:var(--damasco) 0 0/120px 160px,radial-gradient(120% 120% at 30% 30%,var(--vino-2),var(--vino) 60%,var(--vino-3));color:var(--crema)}
+.page.vino::before,.page.light::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.18;mix-blend-mode:overlay;pointer-events:none}
+.page.light{background:var(--papel)}
+
+.frame{position:absolute;padding:16px;background:
+  linear-gradient(135deg,#fff 0%,#e8e4dc 30%,#fff 50%,#d9d4ca 70%,#fff 100%);
+  box-shadow:0 20px 30px -14px rgba(0,0,0,.7),inset 0 0 0 3px #fff,inset 0 0 0 5px #cbc5b9,inset 0 0 0 8px #fff,inset 0 0 0 9px #b7b0a2}
+.frame .ph{width:100%;height:100%}
+.frame.rect{left:8%;top:8%;width:46%;aspect-ratio:3/4;transform:rotate(-3deg)}
+.frame.oval{right:8%;bottom:8%;width:44%;aspect-ratio:3/4;border-radius:50%;transform:rotate(4deg)}
+.frame.oval .ph{border-radius:50%}
+
+.about-title{font-family:var(--f-serif);font-style:italic;font-weight:400;font-size:clamp(48px,7vw,96px);letter-spacing:.12em;line-height:1;margin-bottom:28px;color:var(--vino)}
+.about-text p{font:400 15px/1.85 var(--f-serif);font-style:italic;color:#3a2a2c;letter-spacing:.02em;margin-bottom:16px;max-width:46ch}
+.drop{float:left;font:400 64px/.8 var(--f-script);color:var(--vino);margin:6px 8px 0 0}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:30px;border-top:1px solid #3a2a2c;padding-top:18px}
+.stat-row b{display:block;font-family:var(--f-cond);font-size:clamp(34px,4vw,52px);letter-spacing:.04em;color:var(--vino);line-height:1}
+.stat-row span{font:700 9px/1.4 var(--f-mono);letter-spacing:.24em;text-transform:uppercase}
+.page-num{position:absolute;bottom:18px;font:400 11px/1 var(--f-mono);letter-spacing:.3em}
+.page-num.l{left:24px}.page-num.r{right:24px}
+.wax{position:absolute;width:44px;height:44px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#8a2f3a,#4a1219 70%);box-shadow:0 4px 8px rgba(0,0,0,.5),inset 0 0 0 4px rgba(0,0,0,.15);display:grid;place-items:center;font-family:var(--f-script);color:#e8c3c8;font-size:22px}
+
+/* =========================================================
+   03 · SERVICIOS — baby files (fichas rosa sobre negro)
+   ========================================================= */
+.files{background:#141414;position:relative;overflow:hidden;padding:clamp(60px,9vw,130px) clamp(16px,4vw,60px)}
+.files::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(115deg,transparent 30%,rgba(255,255,255,.05) 34%,transparent 40%),var(--grano);opacity:.6;pointer-events:none}
+.files .sec-head{color:var(--crema)}
+.sheets{position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2.5vw,32px)}
+.sheet{position:relative;padding:28px 24px 26px;min-height:440px;display:flex;flex-direction:column;box-shadow:0 30px 40px -24px rgba(0,0,0,.9)}
+.sheet:nth-child(1){background:var(--rosa);transform:rotate(-2.5deg)}
+.sheet:nth-child(2){background:#ecebe8;transform:rotate(1.5deg) translateY(30px)}
+.sheet:nth-child(3){background:var(--rosa);transform:rotate(-1deg)}
+.sheet::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.14;mix-blend-mode:multiply;pointer-events:none}
+.sheet::after{ /* funda plástica */
+  content:"";position:absolute;inset:-8px;border:1px solid rgba(255,255,255,.2);background:linear-gradient(160deg,rgba(255,255,255,.18),transparent 30%,transparent 70%,rgba(255,255,255,.1));pointer-events:none}
+.sheet .meta{display:flex;justify-content:space-between;font:700 10px/1 var(--f-mono);letter-spacing:.24em}
+.sheet h3{font-family:var(--f-bold);text-transform:uppercase;font-size:clamp(26px,3vw,40px);line-height:.92;letter-spacing:.06em;margin:28px 0 6px}
+.sheet h3 em{font-style:normal;display:block;font-size:.55em;letter-spacing:.5em;margin-top:8px}
+.sheet .ph{height:150px;margin:16px 0}
+.sheet ul{list-style:none;margin-top:auto;font:400 12px/2 var(--f-mono);letter-spacing:.06em}
+.sheet ul li::before{content:"→ "}
+.sheet .holes{position:absolute;left:0;right:0;bottom:-26px;height:18px;display:flex;justify-content:space-around}
+.sheet .holes i{width:10px;height:10px;border-radius:50%;background:#141414}
+
+/* =========================================================
+   04 · PROYECTOS — rayas vino + bandeja cromada
+   ========================================================= */
+.stripes{position:relative;padding:clamp(60px,9vw,130px) clamp(16px,4vw,60px);
+  background:repeating-linear-gradient(90deg,var(--vino) 0 34px,var(--crema) 34px 52px)}
+.stripes::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.3;mix-blend-mode:multiply;pointer-events:none}
+.stripes .sec-head{background:var(--crema);padding:14px 18px;color:var(--vino)}
+.tray{position:relative;max-width:1100px;margin:0 auto;aspect-ratio:16/10;border-radius:50%/42%;
+  background:
+    radial-gradient(70% 60% at 50% 50%,#f4f4f4 0%,#c8c8c8 45%,#8f8f8f 62%,#fdfdfd 70%,#9a9a9a 78%,#e6e6e6 86%,#6f6f6f 100%);
+  box-shadow:0 50px 70px -30px rgba(0,0,0,.8),inset 0 0 0 10px rgba(255,255,255,.35)}
+.tray::after{content:"";position:absolute;inset:12%;border-radius:50%/42%;box-shadow:inset 0 8px 20px rgba(0,0,0,.35),0 2px 0 rgba(255,255,255,.8)}
+.tray .polaroid{width:26%;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1),z-index 0s;z-index:2}
+.tray .polaroid:hover{transform:rotate(0) scale(1.08) !important;z-index:10}
+.tray .polaroid .ph{aspect-ratio:4/5}
+.tray .p1{left:14%;top:10%;transform:rotate(-8deg)}
+.tray .p2{left:38%;top:2%;transform:rotate(5deg)}
+.tray .p3{right:12%;top:14%;transform:rotate(12deg)}
+.tray .p4{left:26%;bottom:4%;transform:rotate(-4deg)}
+.tray .p5{right:26%;bottom:2%;transform:rotate(7deg)}
+
+.case-list{position:relative;max-width:1240px;margin:clamp(40px,6vw,80px) auto 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--vino)}
+.case{background:var(--crema);padding:22px;display:flex;flex-direction:column;gap:8px}
+.case .n{font-family:var(--f-pixel);font-size:24px;color:var(--vino)}
+.case h4{font-family:var(--f-bold);text-transform:uppercase;letter-spacing:.2em;font-size:15px}
+.case p{font:400 12px/1.7 var(--f-mono)}
+.case .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.case .tags span{font:700 9px/1 var(--f-mono);letter-spacing:.2em;text-transform:uppercase;padding:6px 8px;border:1px solid var(--vino);color:var(--vino)}
+
+/* =========================================================
+   05 · EDITORIAL — revista pixel
+   ========================================================= */
+.editorial{background:#e9e7e3;padding:clamp(60px,9vw,130px) clamp(16px,4vw,60px);position:relative}
+.editorial::before{content:"";position:absolute;inset:0;background:var(--papel-fibra);pointer-events:none}
+.mag{position:relative;max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.2fr 1fr .9fr;gap:clamp(16px,3vw,40px);align-items:start}
+.mag .cover{position:relative;aspect-ratio:3/4;box-shadow:0 30px 40px -24px rgba(0,0,0,.6)}
+.mag .cover .ph{position:absolute;inset:0}
+.mag .cover .quote{position:absolute;left:6%;top:6%;right:6%;z-index:3;font-family:var(--f-pixel);color:var(--rosa);font-size:clamp(44px,6vw,84px);line-height:.82;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.mag .cover .issue{position:absolute;left:6%;bottom:5%;right:6%;z-index:3;display:flex;justify-content:space-between;color:#fff;font:700 10px/1 var(--f-mono);letter-spacing:.24em}
+.mag .vert{position:absolute;right:4%;top:6%;z-index:3;writing-mode:vertical-rl;font-family:var(--f-pixel);font-size:clamp(40px,5vw,70px);color:var(--rosa);letter-spacing:.06em}
+.mag .pinkpage{background:var(--rosa);aspect-ratio:3/4;padding:26px;position:relative;display:flex;flex-direction:column;box-shadow:0 30px 40px -24px rgba(0,0,0,.5)}
+.mag .pinkpage::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.15;mix-blend-mode:multiply}
+.mag .blob{flex:1;margin:20px 0;border-radius:48% 52% 45% 55%/58% 50% 50% 42%;background:radial-gradient(circle at 40% 35%,#6c6c6c,#262626 70%);display:grid;place-items:center;padding:18%;position:relative}
+.mag .blob::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--grano);opacity:.6;mix-blend-mode:overlay}
+.mag .blob p{font-family:var(--f-cond);color:#fff;text-transform:uppercase;font-size:clamp(18px,2.2vw,30px);line-height:1;letter-spacing:.02em;text-align:center;position:relative;z-index:2}
+.mag .col{font:400 11px/1.75 var(--f-mono);text-align:justify}
+.mag .col h5{font-family:var(--f-cond);font-size:28px;letter-spacing:.06em;text-transform:uppercase;line-height:1;margin-bottom:10px}
+.mag .col .hl{background:var(--rosa);padding:14px;margin:14px 0}
+.mag .col .ph{aspect-ratio:3/4;margin-top:12px}
+
+/* =========================================================
+   06 · PROCESO — carpeta café + aplicación
+   ========================================================= */
+.folder-sec{position:relative;padding:clamp(60px,9vw,130px) clamp(16px,4vw,60px);
+  background:radial-gradient(circle,#9fb4cf 1.6px,transparent 2px) 0 0/16px 16px,#c9d6e6}
+.folder-sec::before{content:"";position:absolute;inset:0;background:var(--grano);opacity:.25;mix-blend-mode:multiply;pointer-events:none}
+.folder{position:relative;max-width:1180px;margin:0 auto;background:linear-gradient(180deg,#6a4b39,var(--cafe) 40%,#4d3628);border-radius:0 18px 18px 18px;padding:clamp(28px,5vw,60px);min-height:620px;box-shadow:0 40px 60px -30px rgba(0,0,0,.7)}
+.folder::before{content:"";position:absolute;left:0;top:-44px;width:34%;height:46px;background:#6a4b39;border-radius:16px 16px 0 0}
+.folder::after{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--papel-fibra),var(--grano);opacity:.35;mix-blend-mode:overlay;pointer-events:none}
+.folder-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:start}
+.application{background:var(--papel);padding:26px;transform:rotate(-1.5deg);box-shadow:0 20px 30px -14px rgba(0,0,0,.6);position:relative}
+.application::before{content:"";position:absolute;inset:0;background:var(--papel-fibra);pointer-events:none}
+.application h3{font-family:var(--f-bold);font-size:clamp(18px,2.4vw,26px);line-height:1.05;letter-spacing:.02em}
+.application .logo-stamp{position:absolute;right:20px;top:18px;width:74px;height:74px;border-radius:50%;border:2px solid var(--vino);color:var(--vino);display:grid;place-items:center;text-align:center;font:400 18px/.9 var(--f-script);transform:rotate(12deg);opacity:.85}
+.form{margin-top:20px;display:grid;grid-template-columns:120px 1fr;border:1px solid #333}
+.form>div{border-bottom:1px solid #333;padding:9px 10px;font:400 11px/1.3 var(--f-mono)}
+.form>div:nth-child(odd){background:#ece8e0;border-right:1px solid #333;font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:9px;display:flex;align-items:center}
+.form>div:nth-last-child(-n+2){border-bottom:0}
+.form .h{font:400 14px/1.3 var(--f-hand);color:#1d2c6e}
+.steps{list-style:none;display:flex;flex-direction:column;gap:18px}
+.note{position:relative;background:#fbfaf6;padding:22px 22px 18px;box-shadow:0 14px 22px -12px rgba(0,0,0,.6);
+  background-image:linear-gradient(transparent 27px,#c9d6e6 28px);background-size:100% 28px}
+.note:nth-child(odd){transform:rotate(2deg)}.note:nth-child(even){transform:rotate(-2deg)}
+.note .k{font-family:var(--f-pixel);font-size:22px;color:var(--vino)}
+.note p{font:400 15px/28px var(--f-hand);color:#222}
+.note .tape{top:-14px;left:40%;width:80px;height:24px;transform:rotate(-4deg)}
+.earbuds{position:absolute;right:-20px;top:-60px;width:220px;z-index:3;opacity:.95;pointer-events:none}
+
+/* =========================================================
+   07 · CONTACTO — firma
+   ========================================================= */
+.contact{background:var(--papel);position:relative;padding:clamp(60px,9vw,120px) clamp(16px,4vw,60px) 40px;overflow:hidden}
+.contact::before{content:"";position:absolute;inset:0;background:var(--papel-fibra);pointer-events:none}
+.contact .big{position:relative;font-family:var(--f-script);font-size:clamp(84px,17vw,240px);line-height:.9;color:var(--tinta);text-align:center}
+.contact .sub{position:relative;text-align:center;font-family:var(--f-bold);text-transform:uppercase;letter-spacing:.7em;font-size:clamp(11px,1.4vw,15px);margin-top:10px;padding-left:.7em}
+.contact-grid{position:relative;max-width:1100px;margin:clamp(40px,6vw,80px) auto 0;display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid var(--tinta);border-bottom:2px solid var(--tinta)}
+.contact-grid a{padding:22px 16px;text-decoration:none;border-right:1px solid var(--tinta);display:flex;flex-direction:column;gap:8px;transition:background .2s}
+.contact-grid a:last-child{border-right:0}
+.contact-grid a:hover{background:var(--rosa)}
+.contact-grid small{font:700 9px/1 var(--f-mono);letter-spacing:.3em;text-transform:uppercase;opacity:.6}
+.contact-grid span{font-family:var(--f-bold);letter-spacing:.14em;text-transform:uppercase;font-size:13px;word-break:break-word}
+.contact .mini{position:relative;width:150px;margin:40px auto 0;transform:rotate(4deg)}
+.footer{position:relative;display:flex;justify-content:space-between;max-width:1100px;margin:40px auto 0;flex-wrap:wrap;gap:10px}
+
+/* marquee */
+.marquee{background:var(--vino);color:var(--rosa);overflow:hidden;white-space:nowrap;padding:14px 0;border-block:1px solid #000}
+.marquee div{display:inline-block;animation:mq 30s linear infinite;font-family:var(--f-bold);letter-spacing:.4em;text-transform:uppercase;font-size:14px}
+.marquee.pink{background:var(--rosa);color:var(--carbon)}
+.marquee.pink div{animation-direction:reverse}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* ---------- responsive ---------- */
+@media (max-width:900px){
+  .filmstrip{width:40px;padding-left:14px}.filmstrip .ph{width:22px;height:36px}
+  .hero-nav{left:40px}.hero-nav ul{display:none}
+  .hero-stage{margin-left:40px;padding:90px 14px 60px}
+  .collage{width:calc(100vw - 80px)}
+  .hero-ghost{left:48px}.hero-foot{left:40px}
+  .spread{grid-template-columns:1fr}.spread::after{display:none}
+  .page{min-height:auto}.page.vino{min-height:520px}
+  .sheets{grid-template-columns:1fr}.sheet:nth-child(2){transform:rotate(1deg)}
+  .sheet{min-height:auto}
+  .tray{aspect-ratio:4/5;border-radius:50%/40%}
+  .tray .polaroid{width:40%}
+  .tray .p1{left:6%;top:8%}.tray .p2{right:6%;left:auto;top:6%}.tray .p3{right:30%;top:34%}.tray .p4{left:8%;bottom:8%}.tray .p5{right:6%;bottom:6%}
+  .mag{grid-template-columns:1fr}
+  .folder-grid{grid-template-columns:1fr}
+  .earbuds{display:none}
+  .pink-card{right:0;width:78%;top:58%;padding:14px 12px}.pink-card h1{font-size:20px}.pink-card p{font-size:8px;letter-spacing:.2em}
+  .hero .barcode{right:2%;bottom:4%}.hero .barcode .bars{width:110px;height:30px}
+  .script-label{right:2%}
+  .contact-grid{grid-template-columns:1fr 1fr}
+  .contact-grid a:nth-child(2){border-right:0}
+  .contact-grid a:nth-child(-n+2){border-bottom:1px solid var(--tinta)}
+  .stat-row{grid-template-columns:repeat(3,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ 01 HERO ============ -->
+<header class="hero" id="inicio">
+  <div class="filmstrip" aria-hidden="true">
+    <div class="ph pink"></div><div class="ph"></div><div class="ph dark"></div><div class="ph pink"></div><div class="ph"></div><div class="ph dark"></div><div class="ph"></div><div class="ph pink"></div><div class="ph"></div><div class="ph dark"></div>
+  </div>
+  <div class="hero-ghost g1" aria-hidden="true">BY★CATALINA BY★CATALINA</div>
+  <div class="hero-ghost g2" aria-hidden="true">ARCHIVO DE DISEÑO ★ ARCHIVO</div>
+
+  <nav class="hero-nav">
+    <span class="mark">By Catalina</span>
+    <ul>
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proyectos">Proyectos</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero-stage">
+    <div class="collage">
+      <div class="vellum"></div>
+      <div class="script-label">By Catalina</div>
+
+      <div class="badge">
+        <div class="clip"></div>
+        <div class="card"><div class="inner">
+          <div class="top">
+            <div>
+              <div class="brand">BY★CATALINA<sup>®</sup></div>
+              <div class="cert">CERTIFIED DESIGNER.</div>
+            </div>
+            <div class="id">ID NO. 001</div>
+          </div>
+          <div class="body">
+            <!-- reemplaza por tu retrato: <div class="ph bw"><img src="tu-foto.jpg" alt="Catalina"></div> -->
+            <div class="ph bw" data-label="retrato"></div>
+            <div class="fields">
+              <div>Name: <b>Catalina Ruiz</b></div>
+              <div>Rol: <b>Diseñadora gráfica</b></div>
+              <div>Ciudad: <b>Colombia</b></div>
+              <div>Fav piece: <b>Branding editorial</b></div>
+            </div>
+          </div>
+          <div class="foot">(FRONT VIEW)</div>
+        </div></div>
+      </div>
+      <div class="ring" aria-hidden="true"></div>
+
+      <svg class="safety-pin" viewBox="0 0 220 60" aria-hidden="true">
+        <defs><linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".4" stop-color="#a9a9a9"/><stop offset=".6" stop-color="#f4f4f4"/><stop offset="1" stop-color="#777"/></linearGradient></defs>
+        <path d="M20 30 C20 10 46 10 46 30 C46 46 30 48 26 40 L200 18" fill="none" stroke="url(#chrome)" stroke-width="5" stroke-linecap="round"/>
+        <path d="M30 34 L196 42" fill="none" stroke="url(#chrome)" stroke-width="5" stroke-linecap="round"/>
+        <rect x="186" y="12" width="28" height="36" rx="8" fill="url(#chrome)" stroke="#666" stroke-width="1"/>
+      </svg>
+
+      <div class="pink-card">
+        <h1>BY<span class="star">★</span>CATALINA<sup>®</sup></h1>
+        <p>Branding · Editorial · Dirección de arte</p>
+      </div>
+
+      <div class="pin star" aria-hidden="true">★</div>
+      <div class="pin heart" aria-hidden="true">I <span>♥</span><br>BC</div>
+
+      <div class="polaroid">
+        <div class="tape" style="left:34%;top:-14px;transform:rotate(-6deg)"></div>
+        <div class="ph pink" data-label="proyecto destacado"></div>
+        <div class="cap"><span>BC girls</span><span>archivo 2026</span></div>
+      </div>
+
+      <div class="pin cream" aria-hidden="true">By<br>Cata</div>
+
+      <div class="barcode"><div class="bars"></div><div class="num">2 026 BY CATA 01</div></div>
+    </div>
+  </div>
+
+  <div class="hero-foot mono-s"><span>Portafolio Vol. 01</span><span>↓ Desliza</span><span>© 2026</span></div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div>
+  ★ Branding ★ Identidad visual ★ Editorial ★ Packaging ★ Dirección de arte ★ Redes sociales ★ Tipografía ★ Branding ★ Identidad visual ★ Editorial ★ Packaging ★ Dirección de arte ★ Redes sociales ★ Tipografía&nbsp;
+</div></div>
+
+<!-- ============ 02 SOBRE MÍ ============ -->
+<section class="spread-wrap" id="sobre-mi">
+  <div class="sec-head rv"><span class="num">01/</span><h2>Sobre mí</h2><span class="mono-s">Issue Nº 01 — By Catalina</span></div>
+  <div class="spread rv">
+    <div class="page vino">
+      <div class="frame rect"><div class="ph" data-label="foto 01"></div></div>
+      <div class="frame oval"><div class="ph dark" data-label="foto 02"></div></div>
+      <div class="wax" style="left:58%;top:12%">C</div>
+      <span class="page-num l">— 02</span>
+    </div>
+    <div class="page light">
+      <h3 class="about-title">about me</h3>
+      <div class="about-text">
+        <p><span class="drop">S</span>oy Catalina, diseñadora gráfica con una obsesión: que cada marca se sienta como un objeto que quieres guardar. Trabajo entre lo editorial y lo emocional — texturas, papel, tipografía con carácter y mucho detalle.</p>
+        <p>By Catalina es mi estudio personal: un archivo vivo de identidades, revistas, empaques y piezas digitales hechas a mano y con intención. Creo que el diseño no solo se ve, se colecciona.</p>
+        <p>Lo extraordinario está en lo ordinario. Y lo ordinario, bien diseñado, se vuelve extraordinario.</p>
+      </div>
+      <div class="stat-row">
+        <div><b>+40</b><span>Marcas creadas</span></div>
+        <div><b>05</b><span>Años diseñando</span></div>
+        <div><b>∞</b><span>Tazas de café</span></div>
+      </div>
+      <span class="page-num r">03 —</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 SERVICIOS ============ -->
+<section class="files" id="servicios">
+  <div class="sec-head rv"><span class="num">02/</span><h2>Servicios</h2><span class="mono-s">Ref: Baby Files</span></div>
+  <div class="sheets">
+    <article class="sheet rv">
+      <div class="meta"><span>Nº.01</span><span>REF: PINK</span></div>
+      <h3>Branding<em>Files</em></h3>
+      <div class="ph pink" data-label="moodboard"></div>
+      <ul><li>Logotipo &amp; sistema visual</li><li>Paleta y tipografías</li><li>Manual de marca</li><li>Papelería</li></ul>
+      <div class="holes"><i></i><i></i><i></i><i></i><i></i></div>
+    </article>
+    <article class="sheet rv">
+      <div class="meta"><span>Nº.02</span><span>REF: GREY</span></div>
+      <h3>Editorial<em>Files</em></h3>
+      <div class="ph bw" data-label="revista"></div>
+      <ul><li>Revistas y fanzines</li><li>Libros y memorias</li><li>Catálogos y lookbooks</li><li>Portafolios</li></ul>
+      <div class="holes"><i></i><i></i><i></i><i></i><i></i></div>
+    </article>
+    <article class="sheet rv">
+      <div class="meta"><span>Nº.03</span><span>REF: PINK</span></div>
+      <h3>Digital<em>Files</em></h3>
+      <div class="ph dark" data-label="social"></div>
+      <ul><li>Contenido para redes</li><li>Dirección de arte</li><li>Invitaciones digitales</li><li>Diseño web</li></ul>
+      <div class="holes"><i></i><i></i><i></i><i></i><i></i></div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ 04 PROYECTOS ============ -->
+<section class="stripes" id="proyectos">
+  <div class="sec-head rv"><span class="num">03/</span><h2>Proyectos</h2><span class="mono-s">Selected works</span></div>
+  <div class="tray rv">
+    <div class="polaroid p1"><div class="ph" data-label="proyecto 01"></div><div class="cap"><span>Volver a mí</span><span>01</span></div></div>
+    <div class="polaroid p2"><div class="ph pink" data-label="proyecto 02"></div><div class="cap"><span>Invitaciones</span><span>02</span></div></div>
+    <div class="polaroid p3"><div class="ph dark" data-label="proyecto 03"></div><div class="cap"><span>Branding</span><span>03</span></div></div>
+    <div class="polaroid p4"><div class="ph bw" data-label="proyecto 04"></div><div class="cap"><span>Editorial</span><span>04</span></div></div>
+    <div class="polaroid p5"><div class="ph pink" data-label="proyecto 05"></div><div class="cap"><span>Packaging</span><span>05</span></div></div>
+  </div>
+
+  <div class="case-list rv">
+    <div class="case"><span class="n">01</span><h4>Volver a mí</h4><p>Libro, manual y memoria: diseño editorial completo y visor digital.</p><div class="tags"><span>Editorial</span><span>Web</span></div></div>
+    <div class="case"><span class="n">02</span><h4>Invitaciones</h4><p>Colección de invitaciones digitales personalizadas e interactivas.</p><div class="tags"><span>Digital</span><span>Eventos</span></div></div>
+    <div class="case"><span class="n">03</span><h4>Proyecto 03</h4><p>Identidad visual para una marca de moda. Logo, empaque y redes.</p><div class="tags"><span>Branding</span></div></div>
+    <div class="case"><span class="n">04</span><h4>Proyecto 04</h4><p>Lookbook editorial con fotografía, retoque y diagramación.</p><div class="tags"><span>Editorial</span><span>Foto</span></div></div>
+  </div>
+</section>
+
+<div class="marquee pink" aria-hidden="true"><div>
+  Choose yourself first ★ Diseño con intención ★ Hecho a mano ★ By Catalina ★ Choose yourself first ★ Diseño con intención ★ Hecho a mano ★ By Catalina ★&nbsp;
+</div></div>
+
+<!-- ============ 05 EDITORIAL ============ -->
+<section class="editorial">
+  <div class="sec-head rv"><span class="num">04/</span><h2>Manifiesto</h2><span class="mono-s">Issue #26</span></div>
+  <div class="mag">
+    <div class="cover rv">
+      <div class="ph dark" data-label="portada"></div>
+      <div class="quote">“diseña<br>como si<br>fuera tuyo”</div>
+      <div class="vert">YES — MA'AM</div>
+      <div class="issue"><span>ISSUE #26</span><span>#047</span></div>
+    </div>
+    <div class="pinkpage rv">
+      <div class="mono-s">By Catalina</div>
+      <div class="blob"><p>“Normalize hablar muy bien de tu marca. Porque, bueno… sí.”</p></div>
+      <div class="mono-s" style="display:flex;justify-content:space-between"><span>Issue #26</span><span>048</span></div>
+    </div>
+    <div class="col rv">
+      <h5>Las reglas<br>de la casa</h5>
+      <p>Cada proyecto empieza con una conversación, no con una plantilla. Escucho, investigo, armo moodboards y solo después abro el programa de diseño.</p>
+      <div class="hl">Texturas reales. Tipografía con carácter. Cero diseño genérico.</div>
+      <p>Mi trabajo mezcla lo análogo y lo digital: escaneos, papel, cinta, cromo y pixeles conviviendo en la misma página.</p>
+      <div class="ph bw" data-label="detalle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 PROCESO ============ -->
+<section class="folder-sec" id="proceso">
+  <div class="sec-head rv" style="margin-bottom:70px"><span class="num">05/</span><h2>Proceso</h2><span class="mono-s">Membership application</span></div>
+  <div class="folder rv">
+    <svg class="earbuds" viewBox="0 0 220 260" aria-hidden="true"><path d="M40 20 C10 90 120 110 90 170 S 30 240 120 250 M170 30 C200 110 110 120 140 190 S 200 240 120 250" fill="none" stroke="#f5f5f5" stroke-width="3"/><ellipse cx="40" cy="18" rx="14" ry="10" fill="#fafafa"/><ellipse cx="170" cy="28" rx="14" ry="10" fill="#fafafa"/></svg>
+    <div class="folder-grid">
+      <div class="application">
+        <div class="logo-stamp">By<br>Cata</div>
+        <h3>2026 By Catalina<br>Client Application</h3>
+        <div class="form">
+          <div>Nombre</div><div class="h">Tu marca ✿</div>
+          <div>Necesito</div><div class="h">Branding + redes</div>
+          <div>Estilo</div><div class="h">editorial, texturas, bold</div>
+          <div>Fecha</div><div>2026 — 11 — 19</div>
+          <div>Inversión</div><div>Cotización personalizada</div>
+          <div>Notas</div><div class="h">quiero que se sienta como un archivo ♡</div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:end;margin-top:18px;position:relative">
+          <span class="mono-s">Firma:</span>
+          <span class="script" style="font-size:38px">Catalina</span>
+        </div>
+      </div>
+      <ol class="steps">
+        <li class="note"><div class="tape"></div><span class="k">01 · Brief</span><p>nos conocemos, me cuentas todo de tu marca</p></li>
+        <li class="note"><div class="tape"></div><span class="k">02 · Moodboard</span><p>referentes, texturas y paleta</p></li>
+        <li class="note"><div class="tape"></div><span class="k">03 · Diseño</span><p>propuestas + ajustes juntas</p></li>
+        <li class="note"><div class="tape"></div><span class="k">04 · Entrega</span><p>archivos finales y manual ♡</p></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 CONTACTO ============ -->
+<footer class="contact" id="contacto">
+  <div class="sec-head rv"><span class="num">06/</span><h2>Contacto</h2><span class="mono-s">Let's work together</span></div>
+  <div class="big rv">By Catalina</div>
+  <div class="sub rv">Diseño gráfico · Branding · Editorial</div>
+  <div class="contact-grid rv">
+    <a href="mailto:hola@bycatalina.com"><small>Email</small><span>hola@bycatalina.com</span></a>
+    <a href="https://instagram.com/" target="_blank" rel="noopener"><small>Instagram</small><span>@bycatalina</span></a>
+    <a href="https://www.tiktok.com/" target="_blank" rel="noopener"><small>TikTok</small><span>@bycatalina</span></a>
+    <a href="https://wa.me/" target="_blank" rel="noopener"><small>WhatsApp</small><span>Escríbeme</span></a>
+  </div>
+  <div class="barcode" style="display:block;width:max-content;margin:40px auto 0;transform:rotate(-2deg)"><div class="bars"></div><div class="num">BY ★ CATALINA</div></div>
+  <div class="footer mono-s"><span>© 2026 By Catalina</span><span>Hecho con intención ♡</span><span><a href="#inicio">↑ Volver arriba</a></span></div>
+</footer>
+
+<script>
+  // aparición suave al hacer scroll
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll('.rv').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
